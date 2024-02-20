@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import StudentInfo from './components/StudentInfo';
 import InfoInput from './components/InfoInput';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import InfoButtons from './components/InfoButtons';
 
 function App() {
@@ -14,7 +14,17 @@ function App() {
   };
 
   const [student, setStudent] = useState(studentObj);
-  const [inputValues, setInputValues ] = useState(studentObj);
+  const [inputValues, setInputValues] = useState(studentObj);
+
+  const inputRef = {
+    name: useRef(),
+    age: useRef(),
+    address: useRef()
+  }
+
+  useEffect(() => {
+    console.log(inputRef.current);
+  }, []);
   
   const [refresh, setRefresh ] = useState(false);
 
@@ -101,18 +111,21 @@ function App() {
         onChange={handleInputChange}
         value={inputValues.name}
         placeholder='이름'
+        inputRef={inputRef.name}
       />
       <InfoInput
         name={"age"}
         onChange={handleInputChange}
         value={inputValues.age}
         placeholder='나이'
+        inputRef={inputRef.age}
       />
       <InfoInput
         name={"address"}
         onChange={handleInputChange}
         value={inputValues.address}
         placeholder='주소'
+        inputRef={inputRef.address}
       />
       <InfoButtons>
         <button onClick={handleOnOk} >확인</button>
