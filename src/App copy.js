@@ -3,7 +3,10 @@ import './App.css';
 import StudentInfo from './components/StudentInfo';
 import InfoInput from './components/InfoInput';
 import { useEffect, useState } from 'react';
-import InfoButtons from './components/InfoButtons';
+
+
+// components 하기 전 한곳에 코드 다 적은 것.
+
 
 function App() {
 
@@ -18,7 +21,7 @@ function App() {
   
   const [refresh, setRefresh ] = useState(false);
 
-  // <useEffect> - 변화를 인지한다
+  // <useEffect> 비동기일때 사용- 변화를 인지한다
   // 처음에 무조건한번 동작한다
   // [] 안에의 상태가 변화하면 setInputValues(studentObj) 동작해라 
   useEffect(() => {
@@ -35,15 +38,15 @@ function App() {
    *  3. 변수명만 입력하면 객체의 속성과 value로 한번에 정의할 수 있다.
    */
 
-  let email = "email";
-  let phone = "01000000000";
+  // let email = "email";
+  // let phone = "01000000000";
 
-  let user = {
-    "username": "test",
-    ["password"]: "1234",
-    [email]: "test",
-    phone
-  }
+  // let user = {
+  //   "username": "test",
+  //   ["password"]: "1234",
+  //   [email]: "test",
+  //   phone
+  // }
 
   
   // spread 쓸 땐 let 사용할 것
@@ -79,9 +82,6 @@ function App() {
       //   inputValues.address = value;
       // }
 
-      // <spread> 사용
-
-
     const handleOnOk = () => {
       setStudent(inputValues);
     }
@@ -92,32 +92,30 @@ function App() {
 
   return (
     <>
-      <StudentInfo title="이름" text={student.name} />
-      <StudentInfo title="나이" text={student.age} />
-      <StudentInfo title="주소" text={student.address} />
+      <h1>이름: {student.name}</h1>
+      <h1>나이: {student.age}</h1>
+      <h1>주소: {student.address}</h1>
       
-      <InfoInput
-        name={"name"}
-        onChange={handleInputChange}
-        value={inputValues.name}
-        placeholder='이름'
-      />
-      <InfoInput
-        name={"age"}
-        onChange={handleInputChange}
-        value={inputValues.age}
-        placeholder='나이'
-      />
-      <InfoInput
-        name={"address"}
-        onChange={handleInputChange}
-        value={inputValues.address}
-        placeholder='주소'
-      />
-      <InfoButtons>
-        <button onClick={handleOnOk} >확인</button>
-        <button onClick={handleOnClean} >비우기</button>
-      </InfoButtons>
+      <input type="text" 
+        name='name' 
+        onChange={handleInputChange} 
+        value={inputValues.name} 
+        placeholder='이름'/>
+
+      <input type="text" 
+        name='age' 
+        onChange={handleInputChange} 
+        value={inputValues.age} 
+        placeholder='나이'/>
+
+      <input type="text" 
+        name='address' 
+        onChange={handleInputChange} 
+        value={inputValues.address} 
+        placeholder='주소'/>
+
+      <button onClick={handleOnOk} >확인</button>
+      <button onClick={handleOnClean} >비우기</button>
     </>
   );
 }
